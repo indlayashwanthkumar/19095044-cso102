@@ -1,0 +1,198 @@
+#include<iostream>
+#include<stdlib.h>
+#include<string.h>
+using namespace std;
+#define N 51
+int arr[N];
+int front = -1;
+int rear = 0;
+
+void queueisFull()
+{
+	if(rear == N+1)
+	cout<<"YES\n";
+	else
+	cout<<"NO\n";
+}
+
+void queueisEmpty()
+{
+	if(front == -1)
+	cout<<"YES\n";
+	else
+	cout<<"NO\n";
+}
+
+void addFront()
+{
+	if(rear == N+1)
+	cout<<"Queue is Full\n";
+	else
+	{
+		if(front==-1 && rear == 0)
+		{
+		cin>>arr[++front];
+		rear++;
+	}
+		else
+		{
+		for(int i=rear-1; i>=0; i--)
+		arr[i+1]= arr[i];
+		cin>>arr[front];
+		rear++;
+		}
+	}
+}
+
+void addRear()
+{
+	if(rear == N+1)
+	cout<<"Queue is full\n";
+	else
+	{
+		if(front == -1 && rear == 0)
+		{
+		cin>>arr[++front];
+		rear++;
+	}
+		else
+		{
+		cin>>arr[rear];
+		rear++;
+		}
+	}
+}
+
+void drawFront()
+{
+	if(front == -1)
+	cout<<"Queue is empty\n";
+	else
+	{
+		if(front == 0 && rear == 1)
+		{
+		cout<<"Deleted Element is: ";
+		cout<<arr[front]<<'\n';
+		rear--;
+		front--;
+	}
+	else
+	{
+		cout<<"Deleted element is:";
+		cout<<arr[front]<<'\n';
+		for(int i=1; i<=rear-1; i++)
+		arr[i-1] = arr[i];
+		rear--;
+	}
+	}
+}
+
+void drawRear()
+{
+	if(front == -1)
+	cout<<"Queue is empty\n";
+	else
+	{
+		if(front == 0 && rear == 1)
+		{
+			cout<<"Deleted element is:";
+			cout<<arr[front]<<'\n';
+			front--;
+			rear--;
+		}
+		else
+		{
+		cout<<"Deleted element is:";
+		cout<<arr[rear-1]<<'\n';
+		rear--;
+	}
+}
+}
+
+void peekFront()
+{
+	if(front == -1)
+	cout<<"Queue is Empty\n";
+	else if(rear == N+1 )
+	cout<<"Queue  is Full\n";
+	else
+	cout<<"Front element is\n"<<arr[front];
+}
+
+void peekRear()
+{
+	if(front == -1)
+	cout<<"Queue is Empty\n";
+	else if(rear == N+1)
+	cout<<"Queue is Full\n";
+	else
+	cout<<"Rear element is \n"<<arr[rear-1];
+}
+
+int ch()
+{
+	char a[]="addFront";
+	char b[]="addRear";
+	char c[]="drawFront";
+	char d[] = "drawRear";
+	char e[]= "peekFront";
+	char f[]= "peekRear";
+	char g[]= "queueisEmpty";
+	char h[]= "queueisFull";
+	char s[20];
+	cin>>s;
+	int r1=strcmp(a,s);
+	int r2=strcmp(b,s);
+	int r3=strcmp(c,s);
+	int r4=strcmp(d,s);
+	int r5=strcmp(e,s);
+	int r6=strcmp(f,s);
+	int r7=strcmp(g,s);
+	int r8=strcmp(h,s);
+	if(r1==0)
+	return 1;
+	else if(r2==0)
+	return 2;
+	else if(r3==0)
+	return 3;
+	else if(r4==0)
+	return 4;
+	else if(r5==0)
+	return 5;
+	else if(r6==0)
+	return 6;
+	else if(r7==0)
+	return 7;
+	else if(r8==0)
+	return 8;
+}
+
+int main()
+{   int n=0;
+	int b;
+	cout<<"Enter the no of cycle: ";
+	cin>>b;
+	while(n!=b){
+		switch(ch())
+		{
+		case 1:addFront();
+        break;
+        case 2:addRear();
+        break;
+       	case 3: drawFront();
+        break;
+        case 4: drawRear();
+        break;
+        case 5: peekFront();
+        break;
+        case 6: peekRear();
+        break;
+        case 7: queueisEmpty();
+        break;
+        case 8: queueisFull();
+		break;
+		 default: exit(1);
+		}
+		n++;
+	}
+  }
