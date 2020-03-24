@@ -1,0 +1,238 @@
+//Use a Double Linked List For Deque
+#include<iostream>
+#include<stdlib.h>
+#include<string.h>
+using namespace std;
+struct node
+{
+	int data;
+	node *left;
+	node *right;
+}*front,*rear;
+int len;
+
+int length()
+{
+	struct node *temp;
+	temp = front;
+	int count = 0;
+	while(temp!= NULL)
+	{
+		temp= temp->right;
+		count++;
+	}
+	return count;
+}
+
+void queueisFull()
+{
+    	len = length();
+	if(len == 52)
+	cout<<"YES\n";
+	else
+	cout<<"NO\n";
+}
+
+void queueisEmpty()
+{
+	if(front == NULL)
+	cout<<"YES\n";
+	else
+	cout<<"NO\n";
+}
+
+void addFront()
+{
+    len = length();
+	struct node *temp;
+	temp = new node;
+	cin>>temp->data;
+	temp->left = temp->right = NULL;
+	if(front == NULL)
+	front = rear = temp;
+	else if(len == 52)
+    cout<<"Queue is Full\n";
+	else
+	{
+		front->left = temp;
+		temp->right = front;
+		front = temp;
+	}
+}
+
+void addRear()
+{
+    len = length();
+	struct node *temp;
+	temp = new node;
+	cout<<temp->data;
+	temp->left = temp->right = NULL;
+	if(front == NULL)
+	front = rear = temp;
+	else if(len == 52)
+        cout<<"Queue is Full\n";
+	else
+	{
+		rear->right = temp;
+		temp->left = rear;
+		rear = temp;
+	}
+}
+
+void drawFront()
+{
+	if(front == NULL)
+	{
+		cout<<"Queue is Empty\n";
+	}
+	else
+	{
+		if(front == rear)
+		{
+			struct node *temp;
+			temp = front;
+			cout<<"Deleted element is : \n"<<temp->data;
+			temp->left = temp->right = NULL;
+			front = NULL;
+			rear = NULL;
+			free(temp);
+		}
+		else
+		{
+		struct node *temp;
+		temp = front;
+		cout<<"Deleted element is :\n"<<temp->data;
+		front = temp->right;
+		front->left = NULL;
+		free(temp);
+	}
+}
+}
+
+void drawRear()
+{
+	struct node *temp;
+	if(front == NULL)
+	cout<<"Queue is Empty\n";
+	else
+	{
+		if(front == rear)
+		{
+			temp = front;
+			cout<<"Deleted element is: \n"<<temp->data;
+			temp->left = temp->right = NULL;
+			front = rear = NULL;
+			free(temp);
+		}
+		else
+		{
+			temp = rear;
+			cout<<"Deleted element is : \n"<<temp->data;
+			rear = temp->left;
+			rear->right = NULL;
+			temp->left = NULL;
+			free(temp);
+		}
+	}
+}
+
+void peekFront()
+{
+    len = length();
+    if(front == NULL)
+        cout<<"Queue is Empty\n";
+    else if(len == 52)
+        cout<<"Queue is Full\n";
+    else
+    {
+        	struct node *temp;
+	temp = front;
+	cout<<"Front element is \n"<<temp->data;
+
+    }
+
+}
+
+void peekRear()
+{
+    len = length();
+    if(front == NULL)
+       cout<<"Queue is Empty\n";
+    else if(len == 52)
+        cout<<"Queue is Full\n";
+    else{
+            	struct node *temp;
+	temp = rear;
+	cout<<"Rear element is \n"<<temp->data;
+
+    }
+
+}
+
+int ch()
+{
+	char a[]="addFront";
+	char b[]="addRear";
+	char c[]="drawFront";
+	char d[] = "drawRear";
+	char e[]= "peekFront";
+	char f[]= "peekRear";
+	char g[]= "queueisEmpty";
+	char h[]= "queueisFull";
+	char s[20];
+	cin>>s;
+	int r1=strcmp(a,s);
+	int r2=strcmp(b,s);
+	int r3=strcmp(c,s);
+	int r4=strcmp(d,s);
+	int r5=strcmp(e,s);
+	int r6=strcmp(f,s);
+	int r7=strcmp(g,s);
+	int r8=strcmp(h,s);
+	if(r1==0)
+	return 1;
+	else if(r2==0)
+	return 2;
+	else if(r3==0)
+	return 3;
+	else if(r4==0)
+	return 4;
+	else if(r5==0)
+	return 5;
+	else if(r6==0)
+	return 6;
+	else if(r7==0)
+	return 7;
+	else if(r8==0)
+	return 8;
+}
+
+int main()
+{   int n=0;
+	int b;
+	cout<<"Enter the no of cycle: ";
+	cin>>b;
+	while(n!=b){
+		switch(ch())
+		{
+		case 1:addFront();
+        break;
+        case 2:addRear();
+        break;
+       	case 3: drawFront();
+        break;
+        case 4: drawRear();
+        break;
+        case 5: peekFront();
+        break;
+        case 6: peekRear();
+        break;
+        case 7: queueisEmpty();
+        break;
+        case 8: queueisFull();
+		break;
+		 default: exit(1);
+		}
+		n++;
+	}
+}
